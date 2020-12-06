@@ -71,4 +71,12 @@ boarding2:{[input]
  }
 
 /-"Day 6."
-/
+/"custom[`:inputs/input6.txt]"
+/"customs[`:inputs/input6.txt]"
+custom:{[input]
+  :sum {count distinct raze x} each (0,1+where 0=count each t) cut t:read0 input;
+ }
+
+custom2:{[input]
+  :sum {count (inter) over x where 0<>count each x }each (0,where 0=count each t) cut t:read0 input;
+ }
