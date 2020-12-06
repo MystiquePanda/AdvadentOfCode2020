@@ -30,6 +30,8 @@ tree2:{[input]
  }
 
 /-"Day 4."
+/"passport[`:inputs/input4.txt]"
+/"passport2[`:inputs/input4.txt]"
 scanner:{[input]
   k:`byr`iyr`eyr`hgt`hcl`ecl`pid;
   pspts:{(`$p@\:0)!((p:":" vs ' " " vs " " sv x) @\: 1)} each (0,1+where 0=count each t) cut t:read0 input;
@@ -46,3 +48,27 @@ passport2:{[input]
 
   :exec count i from pspts where byr within (1920;2002), iyr within (2010;2020), eyr within (2020;2030), ecl in `amb`blu`brn`gry`grn`hzl`oth, 9=count each pid, hcl like ("#",raze 6#enlist "[0-9a-f]"), pid like (raze 9#enlist "[0-9]"), (((hgtu=`in) and hgt within (59;76)) or ((hgtu=`cm) and hgt within (150;193)))
  }
+
+ /-"Day 5."
+ /"boarding[`:inputs/input5.txt]"
+ /"boarding2[`:inputs/input5.txt]"
+ticket:{[input]
+   h:{[init;L;input] 
+   :init {:$[y=z;(x 0;(x 0)+floor 0.5 * (x 1) - x 0);((x 0)+ceiling 0.5 * (x 1) - x 0;x 1)]}[;;L]/(`$)each input};
+   /r:first (0;127){:$[y=`F;(x 0;(x 0)+floor 0.5 * (x 1) - x 0);((x 0)+ceiling 0.5 * (x 1) - x 0;x 1)]}/(`$)each 7#input;
+   r:first h[(0;127);`F;7#input];
+   c:first h[(0;7);`L;-3#input];
+  :(r;c)
+ }
+
+boarding:{[input]
+  :max {(x 1)+(x 0)*8} each ticket each read0 input
+ }
+
+boarding2:{[input]
+  t:asc {(x 1)+(x 0)*8} each ticket each read0 input;
+  :1+t where 1<>1_ (-)prior t
+ }
+
+/-"Day 6."
+/
